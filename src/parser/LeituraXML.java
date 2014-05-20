@@ -3,9 +3,7 @@ package parser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Vector;
 
-import modelo.Classe;
 import modelo.Decisao;
 import modelo.TodasMCDC;
 
