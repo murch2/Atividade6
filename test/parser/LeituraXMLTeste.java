@@ -1,6 +1,6 @@
 package parser;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,8 +18,8 @@ public class LeituraXMLTeste {
 		//To fazendo esse teste para um arquivo especifico então acho que não está bom. 
 		
 		LeituraXML leitor = new LeituraXML(); 
-		String path = "/home/digao/MCDC.xml"; 
-		TodasMCDC todasMCDC = leitor.getRequisitosMCDC(path);
+		String path = LeituraXMLTeste.class.getResource("../MCDC.xml").toString();
+		TodasMCDC todasMCDC = leitor.getRequisitosMCDC(path.substring(5));
 		List<Classe> classes = todasMCDC.getClasses(); 
 		assertEquals(classes.size(), 3);
 		
