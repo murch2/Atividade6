@@ -34,7 +34,7 @@ public class HashTable {
 						Map<String, Vector<Boolean>> hashNivelDois = hashRequisitos.get(chave); 
 						
 						for (Condicao cond : condicoes) {
-							hashNivelDois.get(cond.getCodigo()).add(cond.getValor()); 
+							hashNivelDois.get(cond.getCodigo().trim()).add(cond.getValor()); 
 						}
 					} 
 					else {
@@ -46,13 +46,15 @@ public class HashTable {
 						for (Condicao cond : condicoes) {
 							Vector<Boolean> vetor = new Vector<Boolean>();
 							vetor.add(cond.getValor()); 
-							hashNivelDois.put(cond.getCodigo(), vetor); 
+							hashNivelDois.put(cond.getCodigo().trim(), vetor); 
 						}
 						
 						hashRequisitos.put(chave, hashNivelDois);
-					}					
+					}
 				}
+				break;
 			}
+			break; 
 		}
 		return hashRequisitos;
 	}
@@ -78,6 +80,7 @@ public class HashTable {
 	 * @param decisao A decisão a ser analisada 
 	 * @param condicoes As condições presentes na decisão 
 	 */
+	
 	public static void getCondicoesDaDecisao (Decisao decisao, Vector<Condicao> condicoes) {
 		if (decisao.getCondicao() != null) {
 			condicoes.add(decisao.getCondicao()); 
@@ -86,4 +89,62 @@ public class HashTable {
 			getCondicoesDaDecisao(decisao.getDecisaoEsquerda(), condicoes); 
 		}
 	}
+	
+	public static void comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos, Map<String, Map<String, Vector<Boolean>>> hashExecutados) {
+		Set<String> chavesNivel1 = hashRequisitos.keySet();
+		
+		for (String chave1 : chavesNivel1) {
+			Map<String, Vector<Boolean>> hashNivelDoisRequisitos = hashRequisitos.get(chave1);
+			Map<String, Vector<Boolean>> hashNivelDoisExecutados = hashExecutados.get(chave1);
+			
+			Set<String> chavesNivel2 = hashNivelDoisRequisitos.keySet();
+			
+			//Ver se da pra mudar depois
+			
+			String chave2 = ""; 
+			for (String string : chavesNivel2) {
+				chave2 = string; 
+				break; 
+			}
+			
+			
+			int contador = 0; 
+			int sizeRequisitos = hashNivelDoisRequisitos.get(chave2).size();  
+			
+			for (int i = 0; i < sizeRequisitos; i++) {
+				
+				int sizeExecutados = hashNivelDoisExecutados.get(chave2).size();  
+				for (int j = 0; j < sizeExecutados; j++) {					
+					
+					boolean testeOK = true; 
+					for (String string : chavesNivel2) {
+						boolean valorRequisito = hashNivelDoisRequisitos.get(string).elementAt(i);
+						boolean valorExecutado = hashNivelDoisExecutados.get(string).elementAt(j);
+						
+						if (valorRequisito != valorExecutado) {
+							testeOK = false; 
+							break; 
+						}
+					}
+			
+					if (testeOK) {
+						contador++;  
+						break; 
+					}
+				} 
+			}
+			
+			double porcentagem = (double) contador / hashNivelDoisRequisitos.get(chave2).size();
+			
+			System.out.println("Porcentagem = " + porcentagem);
+			
+		}
+	}
 }
+
+
+
+
+
+
+
