@@ -1,6 +1,7 @@
 package main;
 
 import hash.HashTable;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.Vector;
@@ -22,6 +23,13 @@ public class Main {
 		Map<String, Map<String, Vector<Boolean>>> hashRequisitos = HashTable.criaHashTable(todasMCDC);
 		Map<String, Map<String, Vector<Boolean>>> hashExecutados = HashTable.criaHashTable(todasMCDC);
 	
-		HashTable.comparaHashTables(hashRequisitos, hashExecutados);
+		Map<String, Double> hashPorcentagens = HashTable.comparaHashTables(hashRequisitos, hashExecutados);
+		
+		imprimePorcentagens(hashPorcentagens);
+	}
+	
+	//TODO Método que imprime as porcentagens bonitinhas no terminal
+	public static void imprimePorcentagens (Map<String, Double> hashPorcentagens) {
+		
 	}
 }

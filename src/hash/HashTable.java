@@ -90,7 +90,9 @@ public class HashTable {
 		}
 	}
 	
-	public static void comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos, Map<String, Map<String, Vector<Boolean>>> hashExecutados) {
+	public static Map<String, Double> comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos, Map<String, Map<String, Vector<Boolean>>> hashExecutados) {
+		Map<String, Double> result = new HashMap<String, Double>(); 
+		
 		Set<String> chavesNivel1 = hashRequisitos.keySet();
 		
 		for (String chave1 : chavesNivel1) {
@@ -133,12 +135,11 @@ public class HashTable {
 					}
 				} 
 			}
-			
+			//Isso aqui eh a procentagem de cada decisão 
 			double porcentagem = (double) contador / hashNivelDoisRequisitos.get(chave2).size();
-			
-			System.out.println("Porcentagem = " + porcentagem);
-			
+			result.put(chave1, porcentagem); 
 		}
+		return result; 
 	}
 }
 
