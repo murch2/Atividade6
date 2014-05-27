@@ -26,7 +26,6 @@ public class HashTable {
 				nomeMetodo = metodo.getMetodo() + "."; 
 				for (Decisao decisao : metodo.getDecisoes()) {
 					String chave = nomeMetodo + decisao.getCodigo(); 
-					
 					if (hashRequisitos.containsKey(chave)) {
 						Vector<Condicao> condicoes = new Vector<Condicao>();
 						getCondicoesDaDecisao(decisao, condicoes); 
@@ -66,8 +65,6 @@ public class HashTable {
 	public void printaHash (Map<String, Map<String, Vector<Boolean>>> hash) {
 		Set<String> strings = hash.keySet(); 
 		
-	
-		
 		for (String string : strings) {
 			System.out.println("Chave = " + string);
 			System.out.println("---Valor : ");
@@ -89,8 +86,16 @@ public class HashTable {
 			getCondicoesDaDecisao(decisao.getDecisaoEsquerda(), condicoes); 
 		}
 	}
-	
-	public static Map<String, Double> comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos, Map<String, Map<String, Vector<Boolean>>> hashExecutados) {
+
+	/**
+	 * Dados dois hashes, um de requisitos e outro de valores executados pela malha de testes devolve um terceiro hash com que cada decisão cobriu o MCDC
+	 * @param hashRequisitos hash que representa os valores necessários para a cobertura do MCDC
+	 * @param hashExecutados hash que representa os valores executados pela malha de testes
+	 * @return um hash <String, double> onde as chaves são as decisões e o valor double é a procentagem que foi coberta do MCDC
+	 */
+	public static Map<String, Double> comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos,
+														 Map<String, Map<String, Vector<Boolean>>> hashExecutados) {
+		
 		Map<String, Double> result = new HashMap<String, Double>(); 
 		
 		Set<String> chavesNivel1 = hashRequisitos.keySet();
@@ -141,6 +146,36 @@ public class HashTable {
 		}
 		return result; 
 	}
+	
+	
+	//TODO escrever javaDOC disso e talvez passar a chave 1 e 2 por argumento já. 
+	public Map<String, Map<String, Vector<Boolean>>> preencheHash (Map<String, Map<String, Vector<Boolean>>> hash, String classe, String metodo, 
+			String decisao, String condicao, boolean valor) {
+		
+		String chave1 = classe + metodo + decisao;
+		String chave2 = condicao; 
+		
+		if (hash.containsKey(chave1)) {
+			if (hash.get(chave1).containsKey(chave2)) {
+				hash.get(chave1).get(chave2).add(valor); 
+			} 
+			else {
+				Vector<Boolean> vetor = new Vector<Boolean>(); 
+				hash.get(chave1).put(chave2, vetor); 
+			}
+		} 
+		else {
+			Map<String, Vector<Boolean>> hashNivel2 = new HashMap<String, Vector<Boolean>>();
+			Vector<Boolean> vetor = new Vector<Boolean>(); 
+			vetor.add(valor); 
+			hashNivel2.put(chave2, vetor);
+			hash.put(chave1, hashNivel2); 
+		}
+		return hash; 
+	}
+	
+	
+	
 }
 
 

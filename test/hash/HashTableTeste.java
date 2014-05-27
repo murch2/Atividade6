@@ -41,6 +41,37 @@ public class HashTableTeste {
 	public void comparaHashTablesTesteZeroPorCento() {
 		
 	}
+	
+	@Test
+	public void preencheHashTeste () {
+		HashTable ht = new HashTable(); 
+		HashMap<String, Map<String, Vector<Boolean>>> hash = new HashMap<String, Map<String, Vector<Boolean>>>();
+		
+		ht.preencheHash(hash, "ExemploDeClasse.", "Metodo.", "decisao", "a > 0", true);
+		assertEquals(hash.get("ExemploDeClasse.Metodo.decisao").get("a > 0").get(0), true);
+		
+		ht.preencheHash(hash, "ExemploDeClasse.", "Metodo.", "decisao", "a > 0", false);
+		assertEquals(hash.get("ExemploDeClasse.Metodo.decisao").get("a > 0").get(1), false);
+		
+		ht.preencheHash(hash, "ExemploDeClasse.", "Metodo.", "decisao", "a > 0", false);
+		assertEquals(hash.get("ExemploDeClasse.Metodo.decisao").get("a > 0").get(2), false);
+		
+		ht.preencheHash(hash, "ExemploDeClasse.", "Metodo.", "decisao", "a > 0", true);
+		assertEquals(hash.get("ExemploDeClasse.Metodo.decisao").get("a > 0").get(3), true);
+		
+		ht.preencheHash(hash, "ExemploDeClasse2.", "Metodo1.", "decisao", "cond1", false);
+		assertEquals(hash.get("ExemploDeClasse2.Metodo1.decisao").get("cond1").get(0), false);
+		
+		ht.preencheHash(hash, "ExemploDeClasse2.", "Metodo2.", "decisao", "cond2", false);
+		assertEquals(hash.get("ExemploDeClasse2.Metodo2.decisao").get("cond2").get(0), false);
+		
+		ht.preencheHash(hash, "ExemploDeClasse2.", "Metodo3.", "decisao", "cond3", true);
+		assertEquals(hash.get("ExemploDeClasse2.Metodo3.decisao").get("cond3").get(0), true);
+		
+		ht.preencheHash(hash, "ExemploDeClasse2.", "Metodo4.", "decisao", "cond3", true);
+		assertEquals(hash.get("ExemploDeClasse2.Metodo4.decisao").get("cond3").get(0), true);
+		
+	}
 
 	//Por enquanto tá só com uma decisão. 
 	public void criaHashesCemPorCento (Map<String, Map<String, Vector<Boolean>>> hash1, Map<String, Map<String, Vector<Boolean>>> hash2 ) {
@@ -94,4 +125,14 @@ public class HashTableTeste {
 	public void criaHashesZeroPorCento () {
 		
 	}
+	
 }
+
+
+
+
+
+
+
+
+
