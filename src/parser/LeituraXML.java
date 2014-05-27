@@ -25,7 +25,7 @@ public class LeituraXML {
 		File file = new File(path);
 		FileInputStream xmlFile = new FileInputStream(file);
  
-		//Alias feitos na geração do arquivo precisam ser feitos agora também. 
+		//"Alias" feitos na geração do arquivo precisam ser feitos agora também. 
 		xStream.alias("TodasMCDC", TodasMCDC.class);		
 		xStream.alias("decision", Decisao.class);
 		
