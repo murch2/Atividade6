@@ -28,7 +28,7 @@
 			<directory>resources</directory>
 		</resource>
 	</resources>
-    <plugins>z
+    <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
