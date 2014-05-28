@@ -23,7 +23,7 @@ public class HashTableTeste {
 		Set<String> chaves = hashPorcentagens.keySet(); 
 		
 		for (String chave : chaves) {
-			assertEquals(hashPorcentagens.get(chave).doubleValue(), 0.8, DELTA);
+			assertEquals(hashPorcentagens.get(chave).doubleValue(), 1.0, DELTA);
 		}
 	}
 	
