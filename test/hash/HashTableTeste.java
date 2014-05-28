@@ -17,13 +17,13 @@ public class HashTableTeste {
 		Map<String, Map<String, Vector<Boolean>>> hash1 = new HashMap<String, Map<String, Vector<Boolean>>>();
 		Map<String, Map<String, Vector<Boolean>>> hash2 = new HashMap<String, Map<String, Vector<Boolean>>>();
 		
-		criaHashesCemPorCento(hash1, hash2)
+		criaHashesCemPorCento(hash1, hash2); 
 		
 		Map<String, Double> hashPorcentagens = HashTable.comparaHashTables(hash1, hash2);
 		Set<String> chaves = hashPorcentagens.keySet(); 
 		
 		for (String chave : chaves) {
-			assertEquals(hashPorcentagens.get(chave).doubleValue(), 1.0, DELTA);
+			assertEquals(hashPorcentagens.get(chave).doubleValue(), 0.8, DELTA);
 		}
 	}
 	
