@@ -39,13 +39,16 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>**/systest/**</exclude>
-						<exclude>**/integration/**</exclude>
-					</excludes>
-				</configuration>
+				<version>2.17</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>2.17</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
