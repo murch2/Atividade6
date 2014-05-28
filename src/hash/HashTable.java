@@ -51,9 +51,7 @@ public class HashTable {
 						hashRequisitos.put(chave, hashNivelDois);
 					}
 				}
-				break;
 			}
-			break; 
 		}
 		return hashRequisitos;
 	}
@@ -62,7 +60,7 @@ public class HashTable {
 	 * Função auxiliar que imprime o que tem no hash
 	 * @param hash O hash a ser impresso
 	 */
-	public void printaHash (Map<String, Map<String, Vector<Boolean>>> hash) {
+	public static void printaHash (Map<String, Map<String, Vector<Boolean>>> hash) {
 		Set<String> strings = hash.keySet(); 
 		
 		for (String string : strings) {
