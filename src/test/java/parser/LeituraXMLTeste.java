@@ -11,14 +11,14 @@ import modelo.TodasMCDC;
 
 import org.junit.Test;
 
-public class LeituraXMLTest {
+public class LeituraXMLTeste {
 
 	@Test
 	public void getRequisitosMCDCTeste() throws IOException {
 		//To fazendo esse teste para um arquivo especifico então acho que não está bom. 
 		
 		LeituraXML leitor = new LeituraXML(); 
-		String path = LeituraXMLTest.class.getResource("../MCDC.xml").toString();
+		String path = LeituraXMLTeste.class.getResource("../MCDC.xml").toString();
 		TodasMCDC todasMCDC = leitor.getRequisitosMCDC(path.substring(5));
 		List<Classe> classes = todasMCDC.getClasses(); 
 		assertEquals(classes.size(), 3);
