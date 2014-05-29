@@ -9,7 +9,7 @@ import java.util.Vector;
 
 import org.junit.Test;
 
-public class HashTableTeste {
+public class HashTableTest {
 	private static final double DELTA = 1e-15;
 	
 	@Test

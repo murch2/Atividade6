@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ExemploClasseTresTeste {
+public class ExemploClasseTresTest {
 
 	@Test
 	public void test() {

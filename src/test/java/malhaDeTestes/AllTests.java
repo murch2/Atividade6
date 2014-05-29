@@ -10,8 +10,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ExemploClasseDoisTeste.class, ExemploClasseTresTeste.class,
-		ExemploClasseUmTeste.class })
+@SuiteClasses({ ExemploClasseDoisTest.class, ExemploClasseTresTest.class,
+		ExemploClasseUmTest.class })
 public class AllTests {
 
 }
