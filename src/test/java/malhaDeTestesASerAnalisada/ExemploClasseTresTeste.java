@@ -1,10 +1,10 @@
-package malhaDeTestes;
+package malhaDeTestesASerAnalisada;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ExemploClasseTresTest {
+public class ExemploClasseTresTeste {
 
 	@Test
 	public void test() {
