@@ -8,7 +8,7 @@ public class ExemploClasseDoisTeste {
 
 	@Test
 	public void test() {
-		System.out.println("Passa no 2");
+		//Fazer os testes aqui. 
 	}
 
 }

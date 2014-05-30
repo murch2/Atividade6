@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import org.json.JSONObject;
+
 import modelo.TodasMCDC;
 import parser.LeituraXML;
 
@@ -30,22 +32,45 @@ public class Main {
 		imprimePorcentagens(hashPorcentagens);
 	}
 	
-	//TODO Continuar esse método que imprimirá as coisas no console mesmo. 
+	//TODO Continuar esse método que imprimirá as coisas no console mesmo.
+	
+	//O algoritmo desse metodo eh realmente ruim. 
+	@SuppressWarnings("unchecked")
 	public static void imprimePorcentagens (Map<String, Double> hashPorcentagens) {
-		Set<String> chaves = hashPorcentagens.keySet(); 
+		JSONObject result = new JSONObject(); 
 		
-		for (String string : chaves) {
-			String[] partes = string.split("\\.");
+		Set<String> chaves = hashPorcentagens.keySet();
+		
+		//Montando o Json que será impresso. (colocar isso em outro metodo. 
+		for (String chave : chaves) {
+			String[] partes = chave.split("\\.");
 			int n = partes.length; 
 			
 			String decisao = partes[n-1];
 			String metodo = partes[n-2];
 			String classe = partes[n-3];
-			String pack; 
-			if (n >= 4)
-				pack = partes[n-4]; 
-
+		
+			if (!result.has(classe)) {
+				result.put(classe, new JSONObject()); 
+			}
 			
+			if (!((JSONObject)result.get(classe)).has(metodo)) {
+				((JSONObject)result.get(classe)).put(metodo, new JSONObject()); 
+			}
+			
+			//Achei uma decisão e pendura no lugar certo
+			((JSONObject)((JSONObject)result.get(classe)).get(metodo)).put(decisao, hashPorcentagens.get(chave)); 
 		}
+		
+		Set<String> chaveClasses = result.keySet();
+		
+//		for (String chaveClasse : chaveClasses) {
+//			Set<String> chaveMetodos = result.getJSONObject(chaveClasse).keySet();
+//			
+//			for (String string : chaveMetodos) {
+//				
+//			}
+//		}
+	
 	}
 }
