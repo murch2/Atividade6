@@ -10,5 +10,4 @@ public class ExemploDeClasseDois {
 		if (a > 0 || b == 0 || c == 0)
 			System.out.println("Entrou no if");
 	}
-
 }

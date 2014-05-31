@@ -1,23 +1,55 @@
 package hash;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.json.JSONObject;
+
+import parser.LeituraXML;
 import modelo.Classe;
 import modelo.Condicao;
 import modelo.Decisao;
 import modelo.Metodo;
 import modelo.TodasMCDC;
 
+//TODO Mudar O nome de Hashtable pra outra coisa melhor
 public class HashTable {
+	
+	private static HashTable singleton = null;
+	private Map<String, Map<String, Vector<Boolean>>> hashExecutados; 
+	
+	public static HashTable getInstance() {
+		if (HashTable.singleton == null){
+			HashTable.singleton = new HashTable();
+		}
+		return HashTable.singleton;
+	}
+	
+	private HashTable () {
+		LeituraXML leitor = new LeituraXML();
+		String path = HashTable.class.getResource("../MCDC.xml").toString();
+		TodasMCDC todasMCDC = null; 
+		Map<String, Map<String, Vector<Boolean>>> hashRequisitos = null; 
+		
+		try {
+			todasMCDC = leitor.getRequisitosMCDC(path.substring(5));
+			hashRequisitos = HashTable.getInstance().criaHashTable(todasMCDC);
+			this.hashExecutados = new HashMap<String, Map<String, Vector<Boolean>>>(); 
+		} catch (IOException e) {
+			System.err.println("Falha ao abrir arquivo XML que contém os requisitos para a cobertura do MCDC");
+			System.exit(-1); 
+		}
+	}
 	
 	/**
 	 * Cria um hash com as informações presentes em todasMCDC
 	 * @param todasMCDC todasMCDC que será lida pra criação do hash
 	 */
-	public static Map<String, Map<String, Vector<Boolean>>> criaHashTable (TodasMCDC todasMCDC) {
+	public Map<String, Map<String, Vector<Boolean>>> criaHashTable (TodasMCDC todasMCDC) {
 		Map<String, Map<String, Vector<Boolean>>> hashRequisitos = new HashMap<String, Map<String,Vector<Boolean>>>(); 
 		String nomeMetodo; 
 		
@@ -60,7 +92,7 @@ public class HashTable {
 	 * Função auxiliar que imprime o que tem no hash
 	 * @param hash O hash a ser impresso
 	 */
-	public static void printaHash (Map<String, Map<String, Vector<Boolean>>> hash) {
+	public void printaHash (Map<String, Map<String, Vector<Boolean>>> hash) {
 		Set<String> strings = hash.keySet(); 
 		
 		for (String string : strings) {
@@ -76,7 +108,7 @@ public class HashTable {
 	 * @param condicoes As condições presentes na decisão 
 	 */
 	
-	public static void getCondicoesDaDecisao (Decisao decisao, Vector<Condicao> condicoes) {
+	public void getCondicoesDaDecisao (Decisao decisao, Vector<Condicao> condicoes) {
 		if (decisao.getCondicao() != null) {
 			condicoes.add(decisao.getCondicao()); 
 		} else {
@@ -91,40 +123,41 @@ public class HashTable {
 	 * @param hashExecutados hash que representa os valores executados pela malha de testes
 	 * @return um hash <String, double> onde as chaves são as decisões e o valor double é a procentagem que foi coberta do MCDC
 	 */
-	public static Map<String, Double> comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos,
+	public Map<String, Double> comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos,
 														 Map<String, Map<String, Vector<Boolean>>> hashExecutados) {
 		
 		Map<String, Double> result = new HashMap<String, Double>(); 
 		
 		Set<String> chavesNivel1 = hashRequisitos.keySet();
 		
+		int contador, sizeRequisitos, sizeExecutados; 
+		boolean valorRequisito, valorExecutado; 
+		double porcentagem; 
+		
 		for (String chave1 : chavesNivel1) {
 			Map<String, Vector<Boolean>> hashNivelDoisRequisitos = hashRequisitos.get(chave1);
 			Map<String, Vector<Boolean>> hashNivelDoisExecutados = hashExecutados.get(chave1);
-			
+
 			Set<String> chavesNivel2 = hashNivelDoisRequisitos.keySet();
-			
-			//Ver se da pra mudar depois
-			
+
 			String chave2 = ""; 
 			for (String string : chavesNivel2) {
 				chave2 = string; 
 				break; 
 			}
-			
-			
-			int contador = 0; 
-			int sizeRequisitos = hashNivelDoisRequisitos.get(chave2).size();  
-			
+
+			contador = 0; 
+			sizeRequisitos = hashNivelDoisRequisitos.get(chave2).size();  
+
 			for (int i = 0; i < sizeRequisitos; i++) {
-				
-				int sizeExecutados = hashNivelDoisExecutados.get(chave2).size();  
+				 sizeExecutados = hashNivelDoisExecutados.get(chave2).size();
+				 
 				for (int j = 0; j < sizeExecutados; j++) {					
 					
 					boolean testeOK = true; 
 					for (String string : chavesNivel2) {
-						boolean valorRequisito = hashNivelDoisRequisitos.get(string).elementAt(i);
-						boolean valorExecutado = hashNivelDoisExecutados.get(string).elementAt(j);
+						 valorRequisito = hashNivelDoisRequisitos.get(string).elementAt(i);
+						 valorExecutado = hashNivelDoisExecutados.get(string).elementAt(j);
 						
 						if (valorRequisito != valorExecutado) {
 							testeOK = false; 
@@ -138,8 +171,7 @@ public class HashTable {
 					}
 				} 
 			}
-			//Isso aqui eh a procentagem de cada decisão 
-			double porcentagem = (double) contador / hashNivelDoisRequisitos.get(chave2).size();
+			porcentagem = (double) contador / hashNivelDoisRequisitos.get(chave2).size();
 			result.put(chave1, porcentagem); 
 		}
 		return result; 
@@ -147,19 +179,18 @@ public class HashTable {
 	
 	
 	//TODO escrever javaDOC disso e talvez passar a chave 1 e 2 por argumento já. 
-	public Map<String, Map<String, Vector<Boolean>>> preencheHash (Map<String, Map<String, Vector<Boolean>>> hash, String classe, String metodo, 
-			String decisao, String condicao, boolean valor) {
+	public void setHashExecutados (String classe, String metodo, String decisao, String condicao, boolean valor) {
 		
 		String chave1 = classe + metodo + decisao;
 		String chave2 = condicao; 
 		
-		if (hash.containsKey(chave1)) {
-			if (hash.get(chave1).containsKey(chave2)) {
-				hash.get(chave1).get(chave2).add(valor); 
+		if (this.hashExecutados.containsKey(chave1)) {
+			if (this.hashExecutados.get(chave1).containsKey(chave2)) {
+				this.hashExecutados.get(chave1).get(chave2).add(valor); 
 			} 
 			else {
 				Vector<Boolean> vetor = new Vector<Boolean>(); 
-				hash.get(chave1).put(chave2, vetor); 
+				this.hashExecutados.get(chave1).put(chave2, vetor); 
 			}
 		} 
 		else {
@@ -167,13 +198,127 @@ public class HashTable {
 			Vector<Boolean> vetor = new Vector<Boolean>(); 
 			vetor.add(valor); 
 			hashNivel2.put(chave2, vetor);
-			hash.put(chave1, hashNivel2); 
+			this.hashExecutados.put(chave1, hashNivel2); 
 		}
-		return hash; 
 	}
 	
+	public boolean getHashExecutados (String classe, String metodo, String decisao, String condicao, int index) {
+		String chave1 = classe + metodo + decisao;
+		String chave2 = condicao;
+		return this.hashExecutados.get(chave1).get(chave2).get(index);
+	}
 	
+	@SuppressWarnings("unchecked")
+	public void imprimePorcentagens (JSONObject json) {
+		
+		Set<String> chavesClasse = json.keySet(); 
+		
+		for (String chaveClasse : chavesClasse) {
+			
+			JSONObject metodosJson = json.getJSONObject(chaveClasse);
+			System.out.println(print("-> Classe : " + chaveClasse, metodosJson.getDouble("porcentagemClasse") * 100 + "%"));
+			Set<String> chavesMetodos = metodosJson.keySet(); 
+			
+			for (String chaveMetodo : chavesMetodos) {
+				if (chaveMetodo.equals("porcentagemClasse")) {
+					continue; 
+				}
+				JSONObject decisoesJson = metodosJson.getJSONObject(chaveMetodo);
+				System.out.println(print("--> Método : " + chaveMetodo, decisoesJson.getDouble("porcentagemMetodo") * 100 + "%"));
+				
+				Set<String> chavesDecisoes = decisoesJson.keySet(); 
+				
+				for (String chaveDecisao : chavesDecisoes) {
+					if (chaveDecisao.equals("porcentagemMetodo")) {
+						continue; 
+					}
+					System.out.println(print("---> Decisão : " + chaveDecisao, decisoesJson.getDouble(chaveDecisao) * 100 + "%"));
+				}
+			}
+		}
+	}
 	
+	private String print(String prefix, String value){
+	    StringBuilder buff = new StringBuilder();
+
+	    int length = prefix.length();
+
+	    int mLength = 75;
+
+	    buff.append(prefix);
+
+	    while(length <= mLength){
+	        buff.append(" ");
+	        length++;
+	    }
+
+	    buff.append(value);
+
+	    return buff.toString();
+	}
+
+	public JSONObject montaJsonObject (Map<String, Double> hashPorcentagens) {
+		JSONObject json = new JSONObject(); 
+
+		Set<String> chaves = hashPorcentagens.keySet();
+
+		for (String chave : chaves) {
+			String[] partes = chave.split("\\.");
+			int n = partes.length; 
+
+			String decisao = partes[n-1];
+			String metodo = partes[n-2];
+			String classe = partes[n-3];
+
+			if (!json.has(classe)) {
+				json.put(classe, new JSONObject()); 
+			}
+
+			if (!((JSONObject)json.get(classe)).has(metodo)) {
+				json.getJSONObject(classe).put(metodo, new JSONObject()); 
+			}
+
+			json.getJSONObject(classe).getJSONObject(metodo).put(decisao, hashPorcentagens.get(chave)); 
+		}
+		
+		return acertaPorcentagens(json); 
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public JSONObject acertaPorcentagens (JSONObject json) {
+		Set<String> chaveClasses = json.keySet();
+
+		double somaMetodo, somaClasse, porcentagem;  
+		int nDecisoesClasse; 
+
+		for (String chaveClasse : chaveClasses) {
+			Set<String> chaveMetodos = json.getJSONObject(chaveClasse).keySet();
+
+			somaClasse = 0; 
+			nDecisoesClasse = 0; 
+
+			for (String chaveMetodo : chaveMetodos) {
+				Set<String> chaveDecisoes = json.getJSONObject(chaveClasse).getJSONObject(chaveMetodo).keySet(); 		
+
+				nDecisoesClasse += chaveDecisoes.size(); 
+				somaMetodo = 0; 
+
+				for (String chaveDecisao : chaveDecisoes) {
+					porcentagem = json.getJSONObject(chaveClasse).getJSONObject(chaveMetodo).getDouble(chaveDecisao);
+					somaMetodo += porcentagem; 
+					somaClasse += porcentagem;
+				}
+
+				json.getJSONObject(chaveClasse).getJSONObject(chaveMetodo).put("porcentagemMetodo", somaMetodo / chaveDecisoes.size()); 
+
+			}
+			porcentagem = somaClasse / nDecisoesClasse; 
+			json.getJSONObject(chaveClasse).put("porcentagemClasse", porcentagem); 
+		}
+
+		return json; 
+	}
 }
 
 
