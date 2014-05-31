@@ -5,7 +5,6 @@ import hash.HashTable;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.json.JSONObject;
@@ -26,51 +25,121 @@ public class Main {
 		}
 		Map<String, Map<String, Vector<Boolean>>> hashRequisitos = HashTable.criaHashTable(todasMCDC);
 		Map<String, Map<String, Vector<Boolean>>> hashExecutados = HashTable.criaHashTable(todasMCDC);
-	
+
 		Map<String, Double> hashPorcentagens = HashTable.comparaHashTables(hashRequisitos, hashExecutados);
-		
-		imprimePorcentagens(hashPorcentagens);
+
+		imprimePorcentagens(montaJsonObject(hashPorcentagens));
 	}
 	
-	//TODO Continuar esse método que imprimirá as coisas no console mesmo.
-	
-	//O algoritmo desse metodo eh realmente ruim. 
 	@SuppressWarnings("unchecked")
-	public static void imprimePorcentagens (Map<String, Double> hashPorcentagens) {
-		JSONObject result = new JSONObject(); 
+	public static void imprimePorcentagens (JSONObject json) {
 		
+		Set<String> chavesClasse = json.keySet(); 
+		
+		for (String chaveClasse : chavesClasse) {
+			
+			JSONObject metodosJson = json.getJSONObject(chaveClasse);
+			System.out.println(print("-> Classe : " + chaveClasse, metodosJson.getDouble("porcentagemClasse") * 100 + "%"));
+			Set<String> chavesMetodos = metodosJson.keySet(); 
+			
+			for (String chaveMetodo : chavesMetodos) {
+				if (chaveMetodo.equals("porcentagemClasse")) {
+					continue; 
+				}
+				JSONObject decisoesJson = metodosJson.getJSONObject(chaveMetodo);
+				System.out.println(print("--> Método : " + chaveMetodo, decisoesJson.getDouble("porcentagemMetodo") * 100 + "%"));
+				
+				Set<String> chavesDecisoes = decisoesJson.keySet(); 
+				
+				for (String chaveDecisao : chavesDecisoes) {
+					if (chaveDecisao.equals("porcentagemMetodo")) {
+						continue; 
+					}
+					System.out.println(print("---> Decisão : " + chaveDecisao, decisoesJson.getDouble(chaveDecisao) * 100 + "%"));
+				}
+			}
+		}
+	}
+	
+	private static String print(String prefix, String value){
+	    StringBuilder buff = new StringBuilder();
+
+	    int length = prefix.length();
+
+	    int mLength = 75;
+
+	    buff.append(prefix);
+
+	    while(length <= mLength){
+	        buff.append(" ");
+	        length++;
+	    }
+
+	    buff.append(value);
+
+	    return buff.toString();
+	}
+
+	public static JSONObject montaJsonObject (Map<String, Double> hashPorcentagens) {
+		JSONObject json = new JSONObject(); 
+
 		Set<String> chaves = hashPorcentagens.keySet();
-		
-		//Montando o Json que será impresso. (colocar isso em outro metodo. 
+
 		for (String chave : chaves) {
 			String[] partes = chave.split("\\.");
 			int n = partes.length; 
-			
+
 			String decisao = partes[n-1];
 			String metodo = partes[n-2];
 			String classe = partes[n-3];
-		
-			if (!result.has(classe)) {
-				result.put(classe, new JSONObject()); 
+
+			if (!json.has(classe)) {
+				json.put(classe, new JSONObject()); 
 			}
-			
-			if (!((JSONObject)result.get(classe)).has(metodo)) {
-				((JSONObject)result.get(classe)).put(metodo, new JSONObject()); 
+
+			if (!((JSONObject)json.get(classe)).has(metodo)) {
+				json.getJSONObject(classe).put(metodo, new JSONObject()); 
 			}
-			
-			//Achei uma decisão e pendura no lugar certo
-			((JSONObject)((JSONObject)result.get(classe)).get(metodo)).put(decisao, hashPorcentagens.get(chave)); 
+
+			json.getJSONObject(classe).getJSONObject(metodo).put(decisao, hashPorcentagens.get(chave)); 
 		}
 		
-		Set<String> chaveClasses = result.keySet();
-		
-//		for (String chaveClasse : chaveClasses) {
-//			Set<String> chaveMetodos = result.getJSONObject(chaveClasse).keySet();
-//			
-//			for (String string : chaveMetodos) {
-//				
-//			}
-//		}
-	
+		return acertaPorcentagens(json); 
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public static JSONObject acertaPorcentagens (JSONObject json) {
+		Set<String> chaveClasses = json.keySet();
+
+		double somaMetodo, somaClasse, porcentagem;  
+		int nDecisoesClasse; 
+
+		for (String chaveClasse : chaveClasses) {
+			Set<String> chaveMetodos = json.getJSONObject(chaveClasse).keySet();
+
+			somaClasse = 0; 
+			nDecisoesClasse = 0; 
+
+			for (String chaveMetodo : chaveMetodos) {
+				Set<String> chaveDecisoes = json.getJSONObject(chaveClasse).getJSONObject(chaveMetodo).keySet(); 		
+
+				nDecisoesClasse += chaveDecisoes.size(); 
+				somaMetodo = 0; 
+
+				for (String chaveDecisao : chaveDecisoes) {
+					porcentagem = json.getJSONObject(chaveClasse).getJSONObject(chaveMetodo).getDouble(chaveDecisao);
+					somaMetodo += porcentagem; 
+					somaClasse += porcentagem;
+				}
+
+				json.getJSONObject(chaveClasse).getJSONObject(chaveMetodo).put("porcentagemMetodo", somaMetodo / chaveDecisoes.size()); 
+
+			}
+			porcentagem = somaClasse / nDecisoesClasse; 
+			json.getJSONObject(chaveClasse).put("porcentagemClasse", porcentagem); 
+		}
+
+		return json; 
 	}
 }
