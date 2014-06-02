@@ -25,7 +25,7 @@ public class ExemploDeClasseUm {
     		}
     		
             if (a > 0 && b < 5)
-                    System.out.println("A eh maior que 0");
+                    a = 5; 
     }
 
     public static void Metodo2 (int a, int b) {
@@ -48,7 +48,7 @@ public class ExemploDeClasseUm {
     		}
     		
             if (a > b || b > 3)
-                    System.out.println("entrando no if");
+                    a = 3; 
     }
 }
 

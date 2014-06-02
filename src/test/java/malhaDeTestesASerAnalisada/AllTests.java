@@ -22,7 +22,6 @@ public class AllTests {
 	
 	
 	@AfterClass public static void comparaHash () {
-		System.out.println("After");
 		Map<String, Double> hashP = HashTable.getInstance().comparaHashTables(HashTable.getInstance().getHashRequisitos(),
 				HashTable.getInstance().getHashExecutados());
 		

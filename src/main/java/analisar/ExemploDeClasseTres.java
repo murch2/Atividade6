@@ -34,16 +34,16 @@ public class  ExemploDeClasseTres{
     	
     	if (a < -5) {
     		HashTable.getInstance().setHashExecutados("ExemploDeClasseTres.",
-					"funcao.", "(a > 0 && b == 0  && c != 0)  ||  a < - 5", "a < -5", true);
+					"funcao.", "(a > 0 && b == 0  && c != 0)  ||  a < - 5", "a < - 5", true);
     	}
     	else {
     		HashTable.getInstance().setHashExecutados("ExemploDeClasseTres.",
-					"funcao.", "(a > 0 && b == 0  && c != 0)  ||  a < - 5", "a < -5", false);
+					"funcao.", "(a > 0 && b == 0  && c != 0)  ||  a < - 5", "a < - 5", false);
     	}
     	
     	
     	if ((a > 0 && b == 0  && c!= 0 )  ||  a < - 5)
-                    System.out.println("OK");
+                    a = 2; 
     }
 
     public static void metodoDeTeste (boolean a) {
@@ -58,7 +58,7 @@ public class  ExemploDeClasseTres{
     		}
     	
             if (a)
-                    System.out.println("OK");
+                    a = false; 
     }
 }
 

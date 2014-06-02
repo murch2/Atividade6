@@ -34,7 +34,7 @@ public class ExemploDeClasseDois {
 		}
 		
 		if (a > 0 && b == 0 && c == 0)
-			System.out.println("Entrou no if");
+			a = 0; 
 	}
 
 	public static void metodoQualquer (int a, int b, int c) {
@@ -70,6 +70,6 @@ public class ExemploDeClasseDois {
 		
 		
 		if (a > 0 || b == 0 || c == 0)
-			System.out.println("Entrou no if");
+			a = 3; 
 	}
 }
