@@ -1,14 +1,26 @@
 package malhaDeTestesASerAnalisada;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import analisar.ExemploDeClasseUm;
 
 public class ExemploClasseUmTeste {
 
 	@Test
-	public void test() {
-		System.out.println("Passa no 1");
+	//Isso cobre 100 % do MCDC
+	public void Metodo1Test() {
+		ExemploDeClasseUm.Metodo1(5, 2);
+		ExemploDeClasseUm.Metodo1(-1, 2);
+		ExemploDeClasseUm.Metodo1(5, 10);
+            
+	}
+	
+	@Test
+	//Isso cobre 100% o MCDC
+	public void Metodo2Test() {
+		ExemploDeClasseUm.Metodo2(1, 2);
+		ExemploDeClasseUm.Metodo2(5, 2);
+		ExemploDeClasseUm.Metodo2(2, 5);
 	}
 
 }

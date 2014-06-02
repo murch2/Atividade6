@@ -4,7 +4,7 @@ import hash.HashTable;
 
 public class ExemploDeClasseUm {
 
-    public void Metodo1 (int a, int b) {
+    public static void Metodo1 (int a, int b) {
 //    		Instrumentação de código
     		if (a > 0) {
     			HashTable.getInstance().setHashExecutados("ExemploDeClasseUm.",
@@ -28,7 +28,7 @@ public class ExemploDeClasseUm {
                     System.out.println("A eh maior que 0");
     }
 
-    public void Metodo2 (int a, int b) {
+    public static void Metodo2 (int a, int b) {
     		if (a > b) {
     			HashTable.getInstance().setHashExecutados("ExemploDeClasseUm.",
     					"Metodo2.", "a > b || b > 3", "a > b", true);

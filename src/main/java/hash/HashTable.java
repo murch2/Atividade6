@@ -2,6 +2,7 @@ package hash;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -140,6 +141,7 @@ public class HashTable {
 		
 		System.out.println("HashRequisitos = " + hashRequisitos);
 		System.out.println("HashExecutados = " + hashExecutados);
+		
 		Map<String, Double> result = new HashMap<String, Double>(); 
 		
 		Set<String> chavesNivel1 = hashRequisitos.keySet();
@@ -152,7 +154,12 @@ public class HashTable {
 			
 			Map<String, Vector<Boolean>> hashNivelDoisRequisitos = hashRequisitos.get(chave1);
 			Map<String, Vector<Boolean>> hashNivelDoisExecutados = hashExecutados.get(chave1);
-
+		
+			System.out.println("HashRequisitos = " + hashNivelDoisRequisitos);
+			System.out.println("HashExecutados = " + hashNivelDoisExecutados);
+			
+			System.out.println("Chave = " + chave1);
+			
 			Set<String> chavesNivel2 = hashNivelDoisRequisitos.keySet();
 
 			String chave2 = ""; 
@@ -337,6 +344,10 @@ public class HashTable {
 		}
 
 		return json; 
+	}
+	
+	public static void main(String[] args) {
+		HashTable.getInstance().printaHash(HashTable.getInstance().getHashRequisitos());
 	}
 }
 

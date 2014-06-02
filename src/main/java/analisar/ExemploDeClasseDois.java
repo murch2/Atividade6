@@ -67,6 +67,8 @@ public class ExemploDeClasseDois {
 					"metodoQualquer.", "a > 0 || b == 0 || c == 0", "c == 0", false);
 		}
 		
+		
+		
 		if (a > 0 || b == 0 || c == 0)
 			System.out.println("Entrou no if");
 	}
