@@ -1,6 +1,5 @@
 package hash;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,6 @@ import modelo.Decisao;
 import modelo.Metodo;
 import modelo.TodasMCDC;
 
-//TODO Mudar O nome de Hashtable pra outra coisa melhor
 public class HashTable {
 	
 	private static HashTable singleton = null;
@@ -33,16 +31,17 @@ public class HashTable {
 		LeituraXML leitor = new LeituraXML();
 		String path = HashTable.class.getResource("../MCDC.xml").toString();
 		TodasMCDC todasMCDC = null; 
-		Map<String, Map<String, Vector<Boolean>>> hashRequisitos = null; 
+		@SuppressWarnings("unused")
+		Map<String, Map<String, Vector<Boolean>>> hashRequisitos; 
 		
 		try {
 			todasMCDC = leitor.getRequisitosMCDC(path.substring(5));
-			hashRequisitos = HashTable.getInstance().criaHashTable(todasMCDC);
+			hashRequisitos = criaHashTable(todasMCDC);
 			this.hashExecutados = new HashMap<String, Map<String, Vector<Boolean>>>(); 
 		} catch (IOException e) {
 			System.err.println("Falha ao abrir arquivo XML que contém os requisitos para a cobertura do MCDC");
 			System.exit(-1); 
-		}
+		}	
 	}
 	
 	/**
