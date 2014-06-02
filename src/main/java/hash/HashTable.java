@@ -33,6 +33,10 @@ public class HashTable {
 		return this.hashRequisitos; 
 	}
 	
+	public  Map<String, Map<String, Vector<Boolean>>> getHashExecutados () {
+		return this.hashExecutados; 
+	}
+	
 	private HashTable () {
 		LeituraXML leitor = new LeituraXML();
 		String path = HashTable.class.getResource("../MCDC.xml").toString();
@@ -41,7 +45,7 @@ public class HashTable {
 		
 		try {
 			todasMCDC = leitor.getRequisitosMCDC(path.substring(5));
-			hashRequisitos = criaHashTable(todasMCDC);
+			this.hashRequisitos = criaHashTable(todasMCDC);
 			this.hashExecutados = new HashMap<String, Map<String, Vector<Boolean>>>(); 
 		} catch (IOException e) {
 			System.err.println("Falha ao abrir arquivo XML que contém os requisitos para a cobertura do MCDC");
@@ -61,10 +65,14 @@ public class HashTable {
 			for (Metodo metodo : classe.getMetodos()) { 
 				nomeMetodo = metodo.getMetodo() + "."; 
 				for (Decisao decisao : metodo.getDecisoes()) {
-					String chave = nomeMetodo + decisao.getCodigo(); 
+					String chave = nomeMetodo + decisao.getCodigo();
+					String[] partes = chave.split("\\.");
+					int n = partes.length; 
+
+					chave = partes[n-3] + "." + partes[n-2] + "." + partes[n-1]; 		
 					if (hashRequisitos.containsKey(chave)) {
 						Vector<Condicao> condicoes = new Vector<Condicao>();
-						getCondicoesDaDecisao(decisao, condicoes); 
+						getCondicoesDaDecisao(decisao, condicoes);
 						
 						Map<String, Vector<Boolean>> hashNivelDois = hashRequisitos.get(chave); 
 						
@@ -82,8 +90,7 @@ public class HashTable {
 							Vector<Boolean> vetor = new Vector<Boolean>();
 							vetor.add(cond.getValor()); 
 							hashNivelDois.put(cond.getCodigo().trim(), vetor); 
-						}
-						
+						}						
 						hashRequisitos.put(chave, hashNivelDois);
 					}
 				}
@@ -130,6 +137,9 @@ public class HashTable {
 	public Map<String, Double> comparaHashTables (Map<String, Map<String, Vector<Boolean>>> hashRequisitos,
 														 Map<String, Map<String, Vector<Boolean>>> hashExecutados) {
 		
+		
+		System.out.println("HashRequisitos = " + hashRequisitos);
+		System.out.println("HashExecutados = " + hashExecutados);
 		Map<String, Double> result = new HashMap<String, Double>(); 
 		
 		Set<String> chavesNivel1 = hashRequisitos.keySet();
@@ -139,6 +149,7 @@ public class HashTable {
 		double porcentagem; 
 		
 		for (String chave1 : chavesNivel1) {
+			
 			Map<String, Vector<Boolean>> hashNivelDoisRequisitos = hashRequisitos.get(chave1);
 			Map<String, Vector<Boolean>> hashNivelDoisExecutados = hashExecutados.get(chave1);
 
@@ -178,6 +189,7 @@ public class HashTable {
 			porcentagem = (double) contador / hashNivelDoisRequisitos.get(chave2).size();
 			result.put(chave1, porcentagem); 
 		}
+		System.out.println("return = " + result);
 		return result; 
 	}
 	
@@ -217,7 +229,7 @@ public class HashTable {
 	
 	@SuppressWarnings("unchecked")
 	public void imprimePorcentagens (JSONObject json) {
-		
+		System.out.println("Aqui");
 		Set<String> chavesClasse = json.keySet(); 
 		
 		for (String chaveClasse : chavesClasse) {
@@ -325,10 +337,6 @@ public class HashTable {
 		}
 
 		return json; 
-	}
-	
-	public static void main(String[] args) {
-		HashTable.getInstance().printaHash(HashTable.getInstance().getHashRequisitos());
 	}
 }
 

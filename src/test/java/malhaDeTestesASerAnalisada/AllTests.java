@@ -1,34 +1,34 @@
-/**
- * @author Rodrigo Duarte Louro
- *
- * May 31, 2014
- */
 package malhaDeTestesASerAnalisada;
 
-import org.junit.After;
-import org.junit.Before;
+import java.util.Map;
+
+import hash.HashTable;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ExemploClasseDoisTeste.class, ExemploClasseTresTeste.class,
-		ExemploClasseUmTeste.class })
+@SuiteClasses({ExemploClasseDoisTeste.class})
 
 public class AllTests {
 	
-	@Before
-	public void iniciaHash () {
-		System.out.println("Antes de executar os testes");
+	@BeforeClass public static void iniciaHash () {
+		HashTable.getInstance(); 
 	}
 	
-	@After
-	public void comparaHash () {
-//		Isso aqui tem que ser chamado quando se acaba a execução dos testes. 
-//		Map<String, Double> hashPorcentagens = HashTable.getInstance().comparaHashTables(hashRequisitos, hashExecutados);
-//
-//		HashTable.getInstance().imprimePorcentagens(HashTable.getInstance().montaJsonObject(hashPorcentagens));
-		System.out.println("Depois de executar os testes");
+	
+//TODO criar TODAs os testes de TODAS as classes. (É assumido no compara hashes que pelo menos um teste por metodo foi
+//	executado. 
+	@AfterClass public static void comparaHash () {
+		System.out.println("After");
+//		Map<String, Double> hashP = HashTable.getInstance().comparaHashTables(HashTable.getInstance().getHashRequisitos(),
+//				HashTable.getInstance().getHashExecutados());
+//		
+////TODO Encapsular esse montaJsonObject
+//		HashTable.getInstance().imprimePorcentagens(HashTable.getInstance().montaJsonObject(hashP)); 
 	}
 	
 }

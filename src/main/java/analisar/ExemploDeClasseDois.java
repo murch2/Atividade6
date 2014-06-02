@@ -4,8 +4,8 @@ import hash.HashTable;
 
 public class ExemploDeClasseDois {
 	
-	public void funcao (int a, int b, int c) {
-//		Instrumentação do código. 
+	public static void funcao (int a, int b, int c) {
+//		Instrumentação do código.
 		if (a > 0) {
 			HashTable.getInstance().setHashExecutados("ExemploDeClasseDois.",
 					"funcao.", "a > 0 && b == 0 && c == 0", "a > 0", true);
@@ -37,7 +37,7 @@ public class ExemploDeClasseDois {
 			System.out.println("Entrou no if");
 	}
 
-	public void metodoQualquer (int a, int b, int c) {
+	public static void metodoQualquer (int a, int b, int c) {
 //		Instrumentação de código
 		
 		if (a > 0) {
