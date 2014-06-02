@@ -19,6 +19,8 @@ public class HashTable {
 	
 	private static HashTable singleton = null;
 	private Map<String, Map<String, Vector<Boolean>>> hashExecutados; 
+	private Map<String, Map<String, Vector<Boolean>>> hashRequisitos;
+	
 	
 	public static HashTable getInstance() {
 		if (HashTable.singleton == null){
@@ -27,12 +29,15 @@ public class HashTable {
 		return HashTable.singleton;
 	}
 	
+	public  Map<String, Map<String, Vector<Boolean>>> getHashRequisitos () {
+		return this.hashRequisitos; 
+	}
+	
 	private HashTable () {
 		LeituraXML leitor = new LeituraXML();
 		String path = HashTable.class.getResource("../MCDC.xml").toString();
 		TodasMCDC todasMCDC = null; 
-		@SuppressWarnings("unused")
-		Map<String, Map<String, Vector<Boolean>>> hashRequisitos; 
+		this.hashRequisitos = null;
 		
 		try {
 			todasMCDC = leitor.getRequisitosMCDC(path.substring(5));
@@ -188,7 +193,8 @@ public class HashTable {
 				this.hashExecutados.get(chave1).get(chave2).add(valor); 
 			} 
 			else {
-				Vector<Boolean> vetor = new Vector<Boolean>(); 
+				Vector<Boolean> vetor = new Vector<Boolean>();
+				vetor.add(valor); 
 				this.hashExecutados.get(chave1).put(chave2, vetor); 
 			}
 		} 
@@ -204,6 +210,8 @@ public class HashTable {
 	public boolean getHashExecutados (String classe, String metodo, String decisao, String condicao, int index) {
 		String chave1 = classe + metodo + decisao;
 		String chave2 = condicao;
+		System.out.println(this.hashExecutados);
+		System.out.println("Chave1 = " + chave1 + "Chave2 = " + chave2);
 		return this.hashExecutados.get(chave1).get(chave2).get(index);
 	}
 	
@@ -317,6 +325,10 @@ public class HashTable {
 		}
 
 		return json; 
+	}
+	
+	public static void main(String[] args) {
+		HashTable.getInstance().printaHash(HashTable.getInstance().getHashRequisitos());
 	}
 }
 
