@@ -21,7 +21,10 @@ public class HashTable {
 	private Map<String, Map<String, Vector<Boolean>>> hashExecutados; 
 	private Map<String, Map<String, Vector<Boolean>>> hashRequisitos;
 
-
+	/**
+	 * 
+	 * @return a instância singleton da classe HashTable
+	 */
 	public static HashTable getInstance() {
 		if (HashTable.singleton == null){
 			HashTable.singleton = new HashTable();
@@ -188,7 +191,14 @@ public class HashTable {
 		return result; 
 	}
 
- 
+	/**
+	 * Método que coloca uma entrada no hashExecutados
+	 * @param classe a classe da decisão
+	 * @param metodo o método da decisão
+	 * @param decisao a decisão inteira
+	 * @param condicao a condição a ser valorada
+	 * @param valor o valor da condição
+	 */
 	public void setHashExecutados (String classe, String metodo, String decisao, String condicao, boolean valor) {
 
 		String chave1 = classe + metodo + decisao;
@@ -213,12 +223,27 @@ public class HashTable {
 		}
 	}
 
+	/**
+	 * Devolve o valor de uma execução do hashExecutados
+	 * @param classe a classe da decisão
+	 * @param metodo o método da decisão
+	 * @param decisao a decisão inteira
+	 * @param condicao a condição a ser valorada
+	 * @param index o indice (numero do teste) a ser retornado
+	 * @return
+	 */
+	
 	public boolean getHashExecutados (String classe, String metodo, String decisao, String condicao, int index) {
 		String chave1 = classe + metodo + decisao;
 		String chave2 = condicao;
 		return this.hashExecutados.get(chave1).get(chave2).get(index);
 	}
 
+	
+	/**
+	 * Executa a saída imprimindo na tela as porcentagens de cobertura do MCDC
+	 * @param json O json com as informações necessárias para a impressão
+	 */
 	@SuppressWarnings("unchecked")
 	public void imprimePorcentagens (JSONObject json) {
 		Set<String> chavesClasse = json.keySet(); 
@@ -248,6 +273,12 @@ public class HashTable {
 		}
 	}
 
+	/**
+	 * Formatação da String a ser printada na tela
+	 * @param prefix Primeira coluna da string
+	 * @param value Segunda coluna da string
+	 * @return uma string formatada
+	 */
 	private String print(String prefix, String value){
 		StringBuilder buff = new StringBuilder();
 
@@ -267,6 +298,11 @@ public class HashTable {
 		return buff.toString();
 	}
 
+	/**
+	 * Monta o json ainda sem as porcentagens corretas
+	 * @param hashPorcentagens o hash com as porcentagens cobertas para cada decisão do MCDC
+	 * @return jsonObject com porcentagens ainda não acertadas para classe e metodos
+	 */
 	public JSONObject montaJsonObject (Map<String, Double> hashPorcentagens) {
 		JSONObject json = new JSONObject(); 
 
@@ -295,6 +331,11 @@ public class HashTable {
 
 	}
 
+	/**
+	 * Um jsonObject pronto para ser printado na tela
+	 * @param json o json com as informações do hashExecutados
+	 * @return jsonObject com as porcentagens acertadas (classe, metodo e decisão)
+	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject acertaPorcentagens (JSONObject json) {
 		Set<String> chaveClasses = json.keySet();
@@ -329,12 +370,4 @@ public class HashTable {
 
 		return json; 
 	}
-
 }
-
-
-
-
-
-
-
