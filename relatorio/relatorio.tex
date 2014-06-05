@@ -1,0 +1,86 @@
+\documentclass[a4paper,11pt]{article} 
+\usepackage{times} 
+\usepackage{enumitem}
+\usepackage[top=10mm, bottom=15mm, left=20mm, right=20mm]{geometry}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+
+\linespread{1.1} 
+
+\newcommand{\sepitem}{\vspace{0.1in}\item} 
+\newcommand{\titulo}{\item \textbf}
+\begin {document}
+\small{
+\title{
+{\small 
+Departamento de Ciência da Computação \hfill IME/USP}\\\vspace{0.1in}
+MAC0340 - Laboratório de Engenharia de Software - 2014/S1
+}
+\vspace{-0.6in}
+
+\author{
+	António Augusto Tavares Martins Miranda (7644342) \\
+	\textit{amartmiranda@gmail.com}
+	\and
+	Rodrigo Duarte Louro (7240216)\\
+	\textit{digao.louro@gmail.com}
+	\vspace{0.1in}
+	\and
+}
+
+\date{Exercício 6: Avaliação da Adequação de testes}
+\maketitle
+}
+\vspace {-0.4in}
+\thispagestyle{empty}
+
+\begin{itemize}
+
+\sepitem \textbf{Ferramentas auxiliares para geração ou análise dos testes}
+\setlength{\parindent}{5ex} 
+
+Para a geração dos testes nós não usamos usamos nenhuma ferramenta, ou seja, criamos todos os nossos 
+testes manualmente.
+
+\sepitem \textbf{Geração dos test cases para a análise da cobertura do MC/DC}
+\setlength{\parindent}{5ex}
+
+Tal como foi dito no tópico anterior, as malhas de testes, usadas no processo de determinação do grau 
+de cobertura do MC/DC, foram elaboradas manualmente, tendo em conta o código fonte alvo e o grau de 
+MC/DC que queríamos cobrir. O diretório Atividade6/src/test/java/malhaDeTestesASerAnalisada possui 
+todas as malhas de teste elaboramos para este protótipo. As malhas de testes que se encontram neste 
+diretório são:
+
+\begin{itemize}
+\item ExemploClasseUmTeste: esta classe de teste é usada para exercitar a classe ExemploClasseUm 
+em relação aos requisitos do MC/DC da mesma. Dentro dele elaboramos dois testes com 100\% de 
+cobertura para o MC/DC.
+\item ExemploClasseDoisTeste: esta classe de teste é usada para exercitar a classe ExemploClasseDois 
+em relação aos requisitos do MC/DC da mesma. Dentro dele elaboramos dois testes com 100\% de 
+cobertura para o MC/DC.
+\item ExemploClasseTresTeste: esta classe de teste é usada para exercitar a classe ExemploClasseTres 
+em relação aos requisitos do MC/DC da mesma. Dentro dele elaboramos dois testes. Um com 100\% de 
+cobertura para o MC/DC e outro que nunca vai cobrir 100\% do MC/DC. 
+\end{itemize}
+
+\sepitem \textbf{Análise da Adequação da malha de testes}
+\setlength{\parindent}{5ex}
+
+\sepitem \textbf{Manual de usuário}
+\setlength{\parindent}{5ex}
+
+\sepitem \textbf{Testes para a validação do protótipo}
+\setlength{\parindent}{5ex}
+
+\sepitem \textbf{Conclusões}
+\setlength{\parindent}{5ex}
+
+\end{itemize}
+
+\vfill
+
+\raggedleft
+{\sc Junho/2014}
+
+\end{document}
