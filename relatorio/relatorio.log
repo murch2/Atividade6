@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.8.28)  5 JUN 2014 16:00
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.8.28)  9 JUN 2014 07:58
 entering extended mode
  %&-line parsing enabled.
 **relatorio.tex
@@ -366,23 +366,23 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 40.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./relatorio.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./relatorio.aux) ) 
 Here is how much of TeX's memory you used:
- 1408 strings out of 495041
- 17989 string characters out of 1181897
- 73541 words of memory out of 3000000
- 4601 multiletter control sequences out of 15000+50000
- 16972 words of font info for 37 fonts, out of 3000000 for 9000
+ 1410 strings out of 495041
+ 18003 string characters out of 1181897
+ 78541 words of memory out of 3000000
+ 4602 multiletter control sequences out of 15000+50000
+ 18050 words of font info for 38 fonts, out of 3000000 for 9000
  30 hyphenation exceptions out of 8191
- 24i,7n,24p,192b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/s
-hare/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
-imes/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></us
-r/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on relatorio.pdf (1 page, 49571 bytes).
+ 24i,7n,24p,192b,309s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/u
+sr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/u
+rw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
+</usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on relatorio.pdf (2 pages, 53391 bytes).
 PDF statistics:
- 23 PDF objects out of 1000 (max. 8388607)
+ 26 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

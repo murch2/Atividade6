@@ -41,7 +41,7 @@ MAC0340 - Laboratório de Engenharia de Software - 2014/S1
 \setlength{\parindent}{5ex} 
 
 Para a geração dos testes nós não usamos usamos nenhuma ferramenta, ou seja, criamos todos os nossos 
-testes manualmente.
+testes manualmente. Para executar os testes usamos a ferramenta JUnit.
 
 \sepitem \textbf{Geração dos test cases para a análise da cobertura do MC/DC}
 \setlength{\parindent}{5ex}
@@ -67,14 +67,53 @@ cobertura para o MC/DC e outro que nunca vai cobrir 100\% do MC/DC.
 \sepitem \textbf{Análise da Adequação da malha de testes}
 \setlength{\parindent}{5ex}
 
+Para fazer a avaliação das malhas de teste, estamos aproveitando o xml que gerado pelo protótipo do
+exercício 4, que contém os requisitos de teste para o cobrimento do MC/DC, e compará-los aos valores 
+observados nas variáveis das decisões/condições do código fonte, resultantes da execução da malha de 
+testes.
+ 
+Primeiramente extraímos os requisitos de teste para o MC/DC do código fonte, presentes no xml gerado 
+pelo programa do exercício 4, para uma hashtable de decisões/condiçõe. Em seguida implantamos diretamente 
+no código fonte (do programa a ser testado), operações de captura e armazenamento dos valores das variáveis 
+essenciais, particulares a cada decisão/condição do programa e geramos (manualmente) as malhas de teste para 
+exercitar o código fonte. Após a execução das malhas de teste é criada uma hashtable com as valorações de cada 
+uma das variáveis essenciais às decisões/condições do programa e que foram exercitadas pela malha de teste. 
+Para computar o grau de cobrimentodo mcdc comparamos as valorações da hashtable com os requisitos para o 
+cobrimento do mcdc com a hashtable dos valores exercítados pela malha de testes.
+
 \sepitem \textbf{Manual de usuário}
 \setlength{\parindent}{5ex}
+
+...
 
 \sepitem \textbf{Testes para a validação do protótipo}
 \setlength{\parindent}{5ex}
 
+Para a validação do nosso protótipo criamos duas classes de testes. A HashTest, visto todas as funcionalidades 
+mais importantes do mesmo se encontram implementadas na classe Hash. Esta classe contém as implementações da 
+montagem das hashs como as valores da execução das malhas de teste e os valores necessários para a cobertura do
+mcdc, comparação das hashs com os valores resultantes da execução das malhas de teste e os valores necessários 
+para o cobrimento do mcdc e por fim a implementação da determinação de cobertura do mcdc de cada uma da classes
+e a sua respectiva impressão. A LeituraXMLTest é simplesmente para garantir que as condições do mcdc estão sendo
+lidas conrretamente do arquivo xml.
+
+Na HashTest temos os seguintes testes:
+\begin{itemize}
+\item setAndGetHashExecutadosTest: este método testa os geters e seters da Hashtable que contem as valorações da 
+execução das malhas de teste;
+\item comparaHashTablesTest: este método testa a comparação da hashtable dos valores exercitados e a hashtable dos
+valores para o cobrimento do mcdc para a determinação da porcentagem de cobertura do mcdc. 
+\end{itemize}
+
+Na LeituraXMLTest temos o seguinte teste:
+\begin{itemize}
+\item getRequisitosMCDCTeste: este método testa se a extração dos requisitos do mcdc está sendo feita corretamente. 
+\end{itemize}
+
 \sepitem \textbf{Conclusões}
 \setlength{\parindent}{5ex}
+
+...
 
 \end{itemize}
 
