@@ -2,9 +2,11 @@
 \usepackage{times} 
 \usepackage{enumitem}
 \usepackage[top=10mm, bottom=15mm, left=20mm, right=20mm]{geometry}
-
+\usepackage{listings}
+\lstset{language=Java}
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{amssymb}
 
 \linespread{1.1} 
 
@@ -79,12 +81,81 @@ essenciais, particulares a cada decisão/condição do programa e geramos (manua
 exercitar o código fonte. Após a execução das malhas de teste é criada uma hashtable com as valorações de cada 
 uma das variáveis essenciais às decisões/condições do programa e que foram exercitadas pela malha de teste. 
 Para computar o grau de cobrimentodo mcdc comparamos as valorações da hashtable com os requisitos para o 
-cobrimento do mcdc com a hashtable dos valores exercítados pela malha de testes.
+cobrimento do mcdc com a hashtable dos valores exercitados pela malha de testes.
 
 \sepitem \textbf{Manual de usuário}
 \setlength{\parindent}{5ex}
 
-...
+Antes de executarmos o protótipo temos que ter os seguintes ficheiros:
+\begin{itemize}
+\item O código fonte que queremos testar;
+\item A malha de testes para exercitar o código fonte;
+\item o arquivo xml do código fonte com os requisitos para o cobrimento do mcdc.
+\end{itemize}
+Cabe ao usuário criar os dois primeiros ficheiros. Atenção a malha de testes pode ser gerada automaticamente por 
+meio de ferramentas apropriadas.
+O arquivo xml com do código fonte com os requisitos do mcdc deve ser pelo protótipo desenvolvido na atividade 4.
+Dado um código fonte, o protótipo da atividade 4 cria 3 arquivos XML cada um com os requisitos para o cobrimento 
+dos critérios de todas as condições, todas as decisões e mcdc. Para mais informações sobre o protótipo da atividade 4
+e sobre como usá-lo recomendamos a leitura do relatório do mesmo. Agora que já temos os xml com os requisitos do mcdc
+basta colocá-lo no diretório Atividade6/resources. Atenção no diretório Atividade6/resources só pode existir um ficheiro
+xml com os requisitos do mcdc.
+Agora o código fonte a ser testado deve ser instrumentado (manualmente) e só depois adicionado ao diretório 
+Atividade6/src/main/java/analisar. 
+Seja ClasseExemplo.java,
+\begin{lstlisting}
+public class ExemploDeClasseDois {
+  public static void metodoExemplo (int a, int b) {
+    // Codigo executado pelo metodo
+    if (a > 0 && b == 0) a = 0;
+  }
+}
+\end{lstlisting}
+, o código instrumentado seria,
+\begin{lstlisting}
+public class ExemploDeClasseDois {
+  public static void metodoExemplo (int a, int b) {
+    // Instrumentacao
+    if (a > 0) {
+      HashTable.getInstance()
+               .setHashExecutados(``ClasseExemplo.'', ``metodoExemplo.'', 
+                                  ``a>0 && b==0'', ``a>0'', true);
+    } else {
+      HashTable.getInstance()
+               .setHashExecutados(``ClasseExemplo.'', ``metodoExemplo.'', 
+                                  ``a>0 && b==0'', ``a>0'', false);
+    }
+    if (b == 0) {
+      HashTable.getInstance()
+               .setHashExecutados(``ClasseExemplo.'', ``metodoExemplo.'', 
+                                  ``a>0 && b==0'', ``b==0'', true);
+    } else {
+      HashTable.getInstance()
+               .setHashExecutados(``ClasseExemplo.'', ``metodoExemplo.'', 
+                                  ``a>0 && b==0'', ``b==0'', false);
+    }
+    // Codigo executado pelo metodo
+    if (a > 0 && b == 0) a = 0;    
+  }
+}
+\end{lstlisting}
+, ou seja, dada uma decisão, queremos pegar todas as valorações possíveis de cada condição da decisão.
+
+Todos os ficheiros a serem instrumentados têm que incluir hash.Hastable e pertencer a package analisar, 
+visto que isso é necessário para a criação do hastable dos valores exercitados pela malha de testes.
+
+O método setHashExecutados recebe como parâmetros a string com o nome da classe a ser instrumentada, 
+string com o nome do método onde se encontra a decisão, string da decisão, string da condição e por fim 
+o valor assumido pela condição. Atenção que as strings que representam classe e o método devem terminar 
+em ponto, exemplo ``ClasseExemplo.'' e ``metodoExemplo.''.
+
+A malha de testes deve ser colocada no diretório Atividade6/src/test/java/malhaDeTestesASerAnalisada com 
+package malhaDeTestesASerAnalisada. Neste mesmo diretório existe o ficheiro TodosOsTestes.java, onde devemos
+acrescentar o nome da malha de testes a ser executada, mais concretamente, no @SuiteClasses. Exemplo: 
+@SuiteClasses({ClasseExemplo.class})
+
+Agora, finalmente, estamos aptos para rodar o programa. Executando o protótipo como junit test, deve ser imprimido 
+no output o grau de cobertura da malha de teste para cada classe, método e decisão do código fonte.   
 
 \sepitem \textbf{Testes para a validação do protótipo}
 \setlength{\parindent}{5ex}
