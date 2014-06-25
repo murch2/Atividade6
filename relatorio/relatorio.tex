@@ -184,7 +184,32 @@ Na LeituraXMLTest temos o seguinte teste:
 \sepitem \textbf{Conclusões}
 \setlength{\parindent}{5ex}
 
-...
+A implementação da atividade 6 foi muito tranquila. Acreditamos que isso deve-se grande parte pela atividade 5, onde 
+simplesmente pensamos em como implementar a adequação da malha de testes para o mcdc a partir do protótipo da atividade 4.
+
+As facilidades que tivemos na elaboração do projeto além do conceito da avaliação da adequação da malha de testes
+ser simples e da professora não ter exigido uma instrumentação de código automática(muito provavelmente no bytecode)
+foram:
+
+\begin{itemize}
+\item reúso dos requisitos do mcdc gerados pelo protótipo da atividade 4;
+\item leitura e interpretação das informações contidas no xml trivial graças à biblioteca xstream.jar que usamos 
+desde a atividade 4 para gerar o xml com os requisitos do mcdc;
+ividade 4;
+\item instrumentação do código manual e diretamente no código fonte;
+\item a linguagem usada para implementar a atividade 6 possui um leque variado de estruturas e recursos (usamos principalmente 
+hastables e  json object) que nos ajudaram no armazenamento, determinação e impressão do grau de cobertura da malha de testes.
+\end{itemize}
+
+A única verdadeira dificuldade que tivemos durante a atividade 6 foi o cálculo da porcentagem de cobertura do mcdc. Esse cálculo 
+tinha que ser feito em relação á classe, método e decisão. Isso gerou alguns problemas de duplicação das porcentagens de cobertura
+que posteriormente foram resolvidas.
+
+Um ponto negativo no nosso projeto é que ele não foi integrado no protótipo da atividade 4, logo, como dito no manual do usuário 
+é necessário usar os dois protótipos para determiarmos o grau de cobertura da malha de testes, ou seja, reduz drasticamente o 
+usabilidade do mesmo. Além disso como o protótipo é dependente dos requisitos do mcdc do protótipo da atividade 4, que não trata 
+todos os casos do mcdc, exemplo tratamento das mácaras e a negação, então a portcentagem de cobertura do mcdc apresentada por este 
+protótipo não é 100\% coerente com a realidade. Apesar de tudo estamos satisfeitos com os resultados obtidos. 
 
 \end{itemize}
 

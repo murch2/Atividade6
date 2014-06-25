@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.8.8)  24 JUN 2014 19:35
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.8.8)  25 JUN 2014 10:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -432,10 +432,10 @@ LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10> not available
  [2] [3]
 (./relatorio.aux) ) 
 Here is how much of TeX's memory you used:
- 3660 strings out of 493485
- 47655 string characters out of 3143527
+ 3661 strings out of 493485
+ 47663 string characters out of 3143527
  145589 words of memory out of 3000000
- 6935 multiletter control sequences out of 15000+200000
+ 6936 multiletter control sequences out of 15000+200000
  21643 words of font info for 49 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  26i,7n,40p,192b,1411s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -445,7 +445,7 @@ hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on relatorio.pdf (3 pages, 64100 bytes).
+Output written on relatorio.pdf (3 pages, 66248 bytes).
 PDF statistics:
  35 PDF objects out of 1000 (max. 8388607)
  24 compressed objects within 1 object stream
