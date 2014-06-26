@@ -304,6 +304,7 @@ public class HashTable {
 	 * @return jsonObject com porcentagens ainda não acertadas para classe e metodos
 	 */
 	public JSONObject montaJsonObject (Map<String, Double> hashPorcentagens) {
+		
 		JSONObject json = new JSONObject(); 
 
 		Set<String> chaves = hashPorcentagens.keySet();
@@ -367,7 +368,6 @@ public class HashTable {
 			porcentagem = somaClasse / nDecisoesClasse; 
 			json.getJSONObject(chaveClasse).put("porcentagemClasse", porcentagem); 
 		}
-
 		return json; 
 	}
 }

@@ -11,7 +11,7 @@
 \linespread{1.1} 
 
 \newcommand{\sepitem}{\vspace{0.1in}\item} 
-\newcommand{\titulo}{\item \textbf}
+\newcommand{\titulo}{\item \textbf{•}}
 \begin {document}
 \small{
 \title{
@@ -75,7 +75,7 @@ observados nas variáveis das decisões/condições do código fonte, resultante
 testes.
  
 Primeiramente extraímos os requisitos de teste para o MC/DC do código fonte, presentes no xml gerado 
-pelo programa do exercício 4, para uma hashtable de decisões/condiçõe. Em seguida implantamos diretamente 
+pelo programa do exercício 4, para uma hashtable de decisões/condições. Em seguida implantamos diretamente 
 no código fonte (do programa a ser testado), operações de captura e armazenamento dos valores das variáveis 
 essenciais, particulares a cada decisão/condição do programa e geramos (manualmente) as malhas de teste para 
 exercitar o código fonte. Após a execução das malhas de teste é criada uma hashtable com as valorações de cada 
@@ -192,7 +192,7 @@ ser simples e da professora não ter exigido uma instrumentação de código aut
 foram:
 
 \begin{itemize}
-\item reúso dos requisitos do mcdc gerados pelo protótipo da atividade 4;
+\item reutilização dos requisitos do mcdc gerados pelo protótipo da atividade 4;
 \item leitura e interpretação das informações contidas no xml trivial graças à biblioteca xstream.jar que usamos 
 desde a atividade 4 para gerar o xml com os requisitos do mcdc;
 ividade 4;
@@ -206,9 +206,9 @@ tinha que ser feito em relação á classe, método e decisão. Isso gerou algun
 que posteriormente foram resolvidas.
 
 Um ponto negativo no nosso projeto é que ele não foi integrado no protótipo da atividade 4, logo, como dito no manual do usuário 
-é necessário usar os dois protótipos para determiarmos o grau de cobertura da malha de testes, ou seja, reduz drasticamente o 
+é necessário usar os dois protótipos para determiarmos o grau de cobertura da malha de testes, ou seja, reduz drasticamente a
 usabilidade do mesmo. Além disso como o protótipo é dependente dos requisitos do mcdc do protótipo da atividade 4, que não trata 
-todos os casos do mcdc, exemplo tratamento das mácaras e a negação, então a portcentagem de cobertura do mcdc apresentada por este 
+todos os casos do mcdc, como por exemplo tratamento das mácaras e a negação, então a porcentagem de cobertura do mcdc apresentada por este 
 protótipo não é 100\% coerente com a realidade. Apesar de tudo estamos satisfeitos com os resultados obtidos. 
 
 \end{itemize}
