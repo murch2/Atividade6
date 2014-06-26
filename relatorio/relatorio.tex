@@ -43,14 +43,14 @@ MAC0340 - Laboratório de Engenharia de Software - 2014/S1
 \setlength{\parindent}{5ex} 
 
 Para a geração dos testes nós não usamos usamos nenhuma ferramenta, ou seja, criamos todos os nossos 
-testes manualmente. Para executar os testes usamos a ferramenta JUnit.
+testes manualmente. Para executar os testes usamos a ferramenta \textit{JUnit}.
 
-\sepitem \textbf{Geração dos test cases para a análise da cobertura do MC/DC}
+\sepitem \textbf{Geração dos \textit{test cases} para a análise da cobertura do MC/DC}
 \setlength{\parindent}{5ex}
 
 Tal como foi dito no tópico anterior, as malhas de testes, usadas no processo de determinação do grau 
 de cobertura do MC/DC, foram elaboradas manualmente, tendo em conta o código fonte alvo e o grau de 
-MC/DC que queríamos cobrir. O diretório Atividade6/src/test/java/malhaDeTestesASerAnalisada possui 
+MC/DC que queríamos cobrir. O diretório \textit{Atividade6/src/test/java/malhaDeTestesASerAnalisada} possui 
 todas as malhas de teste elaboramos para este protótipo. As malhas de testes que se encontram neste 
 diretório são:
 
@@ -69,19 +69,19 @@ cobertura para o MC/DC e outro que nunca vai cobrir 100\% do MC/DC.
 \sepitem \textbf{Análise da Adequação da malha de testes}
 \setlength{\parindent}{5ex}
 
-Para fazer a avaliação das malhas de teste, estamos aproveitando o xml que gerado pelo protótipo do
+Para fazer a avaliação das malhas de teste, estamos aproveitando o \textit{xml} que gerado pelo protótipo do
 exercício 4, que contém os requisitos de teste para o cobrimento do MC/DC, e compará-los aos valores 
 observados nas variáveis das decisões/condições do código fonte, resultantes da execução da malha de 
 testes.
  
-Primeiramente extraímos os requisitos de teste para o MC/DC do código fonte, presentes no xml gerado 
-pelo programa do exercício 4, para uma hashtable de decisões/condições. Em seguida implantamos diretamente 
+Primeiramente extraímos os requisitos de teste para o MC/DC do código fonte, presentes no \textit{xml} gerado 
+pelo programa do exercício 4, para uma textit{hashtable} de decisões/condições. Em seguida implantamos diretamente 
 no código fonte (do programa a ser testado), operações de captura e armazenamento dos valores das variáveis 
 essenciais, particulares a cada decisão/condição do programa e geramos (manualmente) as malhas de teste para 
-exercitar o código fonte. Após a execução das malhas de teste é criada uma hashtable com as valorações de cada 
+exercitar o código fonte. Após a execução das malhas de teste é criada uma \textit{hashtable} com as valorações de cada 
 uma das variáveis essenciais às decisões/condições do programa e que foram exercitadas pela malha de teste. 
-Para computar o grau de cobrimentodo mcdc comparamos as valorações da hashtable com os requisitos para o 
-cobrimento do mcdc com a hashtable dos valores exercitados pela malha de testes.
+Para computar o grau de cobrimento do MC/DC comparamos as valorações da \textit{hashtable} com os requisitos para o 
+cobrimento do MC/DC com a \textit{hashtable} dos valores exercitados pela malha de testes.
 
 \sepitem \textbf{Manual de usuário}
 \setlength{\parindent}{5ex}
@@ -90,18 +90,17 @@ Antes de executarmos o protótipo temos que ter os seguintes ficheiros:
 \begin{itemize}
 \item O código fonte que queremos testar;
 \item A malha de testes para exercitar o código fonte;
-\item o arquivo xml do código fonte com os requisitos para o cobrimento do mcdc.
+\item o arquivo \textit{xml} do código fonte com os requisitos para o cobrimento do MC/DC.
 \end{itemize}
 Cabe ao usuário criar os dois primeiros ficheiros. Atenção a malha de testes pode ser gerada automaticamente por 
 meio de ferramentas apropriadas.
-O arquivo xml com do código fonte com os requisitos do mcdc deve ser pelo protótipo desenvolvido na atividade 4.
-Dado um código fonte, o protótipo da atividade 4 cria 3 arquivos XML cada um com os requisitos para o cobrimento 
-dos critérios de todas as condições, todas as decisões e mcdc. Para mais informações sobre o protótipo da atividade 4
-e sobre como usá-lo recomendamos a leitura do relatório do mesmo. Agora que já temos os xml com os requisitos do mcdc
-basta colocá-lo no diretório Atividade6/resources. Atenção no diretório Atividade6/resources só pode existir um ficheiro
-xml com os requisitos do mcdc.
-Agora o código fonte a ser testado deve ser instrumentado (manualmente) e só depois adicionado ao diretório 
-Atividade6/src/main/java/analisar. 
+O arquivo \textit{xml} com os requisitos do MC/DC deve ser gerado (obrigatoriamente) pelo protótipo da atividade 4. 
+Dado um código fonte, o protótipo da atividade 4 cria 3 arquivos \textit{xml} cada um com os requisitos para o cobrimento 
+dos critérios de todas as condições, todas as decisões e MC/DC. Para mais informações sobre o protótipo da atividade 4
+e sobre como usá-lo recomendamos a leitura do relatório do mesmo. Agora que já temos os \textit{xml} com os requisitos do MC/DC
+basta colocá-lo no diretório \textit{Atividade6/resources}. Atenção no diretório \textit{Atividade6/resources} só pode existir 
+um ficheiro \textit{xml} com os requisitos do MC/DC.
+Agora o código fonte a ser testado deve ser instrumentado (manualmente) e só depois adicionado ao diretório \textit{Atividade6/src/main/java/analisar}. 
 Seja ClasseExemplo.java,
 \begin{lstlisting}
 public class ExemploDeClasseDois {
@@ -141,76 +140,78 @@ public class ExemploDeClasseDois {
 \end{lstlisting}
 , ou seja, dada uma decisão, queremos pegar todas as valorações possíveis de cada condição da decisão.
 
-Todos os ficheiros a serem instrumentados têm que incluir hash.Hastable e pertencer a package analisar, 
-visto que isso é necessário para a criação do hastable dos valores exercitados pela malha de testes.
+Todos os ficheiros a serem instrumentados têm que incluir \textit{hash.Hastable} e pertencer à \textit{package} 
+``analisar'', visto que isso é necessário para a criação da \textit{hash table} dos valores exercitados pela malha de 
+testes.
 
-O método setHashExecutados recebe como parâmetros a string com o nome da classe a ser instrumentada, 
-string com o nome do método onde se encontra a decisão, string da decisão, string da condição e por fim 
-o valor assumido pela condição. Atenção que as strings que representam classe e o método devem terminar 
-em ponto, exemplo ``ClasseExemplo.'' e ``metodoExemplo.''.
+O método \textit{setHashExecutados} recebe como parâmetros a \textit{string} com o nome da classe a ser instrumentada, 
+\textit{string} com o nome do método onde se encontra a decisão, \textit{string} da decisão, \textit{string} da condição 
+e por fim o valor assumido pela condição. Atenção que as strings que representam classe e o método devem terminar em ponto. 
+Exemplo: ``ClasseExemplo.'' e ``metodoExemplo.''.
 
-A malha de testes deve ser colocada no diretório Atividade6/src/test/java/malhaDeTestesASerAnalisada com 
-package malhaDeTestesASerAnalisada. Neste mesmo diretório existe o ficheiro TodosOsTestes.java, onde devemos
-acrescentar o nome da malha de testes a ser executada, mais concretamente, no @SuiteClasses. Exemplo: 
+A malha de testes deve ser colocada no diretório \textit{Atividade6/src/test/java/malhaDeTestesASerAnalisada} com 
+\textit{package} ``malhaDeTestesASerAnalisada''. Neste mesmo diretório existe o ficheiro ``TodosOsTestes.java'', onde devemos
+acrescentar o nome da malha de testes a ser executada, mais concretamente, no \textit{@SuiteClasses}. Exemplo: 
 @SuiteClasses({ClasseExemplo.class})
 
-Agora, finalmente, estamos aptos para rodar o programa. Executando o protótipo como junit test, deve ser imprimido 
-no output o grau de cobertura da malha de teste para cada classe, método e decisão do código fonte.   
+Agora, finalmente, estamos aptos para rodar o programa. Executando o protótipo como \textit{junit test}, deve ser imprimido 
+no \textit{output} o grau de cobertura da malha de teste para cada classe, método e decisão do código fonte.   
 
 \sepitem \textbf{Testes para a validação do protótipo}
 \setlength{\parindent}{5ex}
 
-Para a validação do nosso protótipo criamos duas classes de testes. A HashTest, visto todas as funcionalidades 
-mais importantes do mesmo se encontram implementadas na classe Hash. Esta classe contém as implementações da 
-montagem das hashs como as valores da execução das malhas de teste e os valores necessários para a cobertura do
-mcdc, comparação das hashs com os valores resultantes da execução das malhas de teste e os valores necessários 
-para o cobrimento do mcdc e por fim a implementação da determinação de cobertura do mcdc de cada uma da classes
-e a sua respectiva impressão. A LeituraXMLTest é simplesmente para garantir que as condições do mcdc estão sendo
-lidas conrretamente do arquivo xml.
+Para a validação do nosso protótipo criamos duas classes de testes. A \textit{HashTest}, visto todas as funcionalidades 
+mais importantes do mesmo se encontram implementadas na classe \textit{Hash}. Esta classe contém as implementações da 
+montagem das \textit{hashs} como as valores da execução das malhas de teste e os valores necessários para a cobertura do
+mcdc, comparação das \textit{hashs} com os valores resultantes da execução das malhas de teste e os valores necessários 
+para o cobrimento do MC/DC e por fim a implementação da determinação de cobertura do MC/DC de cada uma da classes
+e a sua respectiva impressão. A ``LeituraXMLTest'' é simplesmente para garantir que as condições do MC/DC estão sendo
+lidas corretamente do arquivo \textit{xml}.
 
 Na HashTest temos os seguintes testes:
 \begin{itemize}
-\item setAndGetHashExecutadosTest: este método testa os geters e seters da Hashtable que contem as valorações da 
-execução das malhas de teste;
-\item comparaHashTablesTest: este método testa a comparação da hashtable dos valores exercitados e a hashtable dos
-valores para o cobrimento do mcdc para a determinação da porcentagem de cobertura do mcdc. 
-\item montaJsonObjectTest: este método testa a transformação do hashTable em json object bem como se as porcentagens cobertas pela classe e métodos foram calculadas de maneira correta. 
+\item setAndGetHashExecutadosTest: este método testa os \textit{getters} e \textit{setters} da \textit{hash table} que contem as 
+valorações da execução das malhas de teste;
+\item comparaHashTablesTest: este método testa a comparação da \textit{hash table} dos valores exercitados e a \textit{hash table} dos
+valores para o cobrimento do MC/DC para a determinação da porcentagem de cobertura do MC/DC. 
+\item montaJsonObjectTest: este método testa a transformação da \textit{hash table} num \textit{json object} bem como se as porcentagens 
+cobertas pela classe e métodos foram calculadas de maneira correta. 
 \end{itemize}
 
-Na LeituraXMLTest temos o seguinte teste:
+Na ``LeituraXMLTest'' temos o seguinte teste:
 \begin{itemize}
-\item getRequisitosMCDCTeste: este método testa se a extração dos requisitos do mcdc está sendo feita corretamente. 
+\item getRequisitosMCDCTeste: este método testa se a extração dos requisitos do MC/DC está sendo feita corretamente. 
 \end{itemize}
 
 \sepitem \textbf{Conclusões}
 \setlength{\parindent}{5ex}
 
 A implementação da atividade 6 foi muito tranquila. Acreditamos que isso deve-se grande parte pela atividade 5, onde 
-simplesmente pensamos em como implementar a adequação da malha de testes para o mcdc a partir do protótipo da atividade 4.
+simplesmente pensamos em como implementar a adequação da malha de testes para o MC/DC a partir do protótipo da atividade 4.
 
 As facilidades que tivemos na elaboração do projeto além do conceito da avaliação da adequação da malha de testes
-ser simples e da professora não ter exigido uma instrumentação de código automática(muito provavelmente no bytecode)
+ser simples e da professora não ter exigido uma instrumentação de código automática(muito provavelmente no \textit{bytecode})
 foram:
 
 \begin{itemize}
-\item reutilização dos requisitos do mcdc gerados pelo protótipo da atividade 4;
-\item leitura e interpretação das informações contidas no xml trivial graças à biblioteca xstream.jar que usamos 
-desde a atividade 4 para gerar o xml com os requisitos do mcdc;
-ividade 4;
+\item reutilização dos requisitos do MC/DC gerados pelo protótipo da atividade 4;
+\item leitura e interpretação das informações contidas no \textit{xml} trivial graças à biblioteca \textit{xstream.jar} que usamos 
+desde a atividade 4 para gerar o \textit{xml} com os requisitos do MC/DC;
 \item instrumentação do código manual e diretamente no código fonte;
 \item a linguagem usada para implementar a atividade 6 possui um leque variado de estruturas e recursos (usamos principalmente 
-hastables e  json object) que nos ajudaram no armazenamento, determinação e impressão do grau de cobertura da malha de testes.
+\textit{hash tables} e  \textit{json object}) que nos ajudaram no armazenamento, determinação e impressão do grau de cobertura da malha 
+de testes.
 \end{itemize}
 
-A única verdadeira dificuldade que tivemos durante a atividade 6 foi o cálculo da porcentagem de cobertura do mcdc. Esse cálculo 
-tinha que ser feito em relação á classe, método e decisão. Isso gerou alguns problemas de duplicação das porcentagens de cobertura
+A única verdadeira dificuldade que tivemos durante a atividade 6 foi o cálculo da porcentagem de cobertura do MC/DC. Esse cálculo 
+tinha que ser feito em relação à classe, método e decisão. Isso gerou alguns problemas de duplicação das porcentagens de cobertura
 que posteriormente foram resolvidas.
 
 Um ponto negativo no nosso projeto é que ele não foi integrado no protótipo da atividade 4, logo, como dito no manual do usuário 
-é necessário usar os dois protótipos para determiarmos o grau de cobertura da malha de testes, ou seja, reduz drasticamente a
-usabilidade do mesmo. Além disso como o protótipo é dependente dos requisitos do mcdc do protótipo da atividade 4, que não trata 
-todos os casos do mcdc, como por exemplo tratamento das mácaras e a negação, então a porcentagem de cobertura do mcdc apresentada por este 
-protótipo não é 100\% coerente com a realidade. Apesar de tudo estamos satisfeitos com os resultados obtidos. 
+é necessário usar os dois protótipos para determinarmos o grau de cobertura da malha de testes, ou seja, reduz drasticamente a
+usabilidade do mesmo. Além disso como o protótipo é dependente dos requisitos do MC/DC do protótipo da atividade 4, que não trata 
+todos os casos do MC/DC, como por exemplo tratamento das máscaras e a negação, então a porcentagem de cobertura do MC/DC apresentada 
+por este protótipo não é 100\% coerente com a realidade. Apesar de tudo estamos satisfeitos com os resultados obtidos. 
 
 \end{itemize}
 
